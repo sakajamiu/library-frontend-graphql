@@ -5,7 +5,7 @@ query {
     allAuthor{
         name
         born 
-        bookCount
+
     }
 }`
 
@@ -14,15 +14,17 @@ query {
     allBook{
         title
         published
-        author
+        author{
+            name
+        }
     }
 }`
 
 export const CREATE_BOOK = gql`
 mutation createBook(
-        $title: String!
-        $author: String!
-        $published: Int!
+        $title: String!,
+        $author: String!,
+        $published: Int!,
         $genres: [String!]!
     )
     {
@@ -36,12 +38,22 @@ mutation createBook(
 `
 export  const EDIT_AUTHOR = gql`
 mutation editAuthor(
-    $name: String!
+    $name: String!,
     $born: Int!
 ){
     editAuthor(name: $name, born:$born){
         name
         born
-        bookCount
+        
+    }
+}`
+
+export const LOGIN =gql`
+mutation login(
+    $username: String!,
+    $password: String!
+){
+    login(username: $username, password:$password){
+        value
     }
 }`
